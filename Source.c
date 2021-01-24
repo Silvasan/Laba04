@@ -1,22 +1,22 @@
 #include <stdio.h> 
-
+#define N 250
 int main() {
-	unsigned char str[250] = "", buffer = 0;
+	unsigned char str[N] = "", buffer = 0;
 	int i = 0, lenght = 0;
 	while (1) {
 		printf("Enter the string: ");
-		fgets(str, 250, stdin);
-		if (!(str[248] == '\0' || str[248] == '\n')) {
+		fgets(str, N, stdin);
+		if (!(str[N-2] == '\0' || str[N-2] == '\n')) {
 			buffer = getchar();
-			if (buffer != '\n') {
-				while (buffer != '\n')			//buffercleaner
-					scanf("%c", &buffer);
-				printf("\nChecking an array for overflow...\n\nError! Please try again.\n\n");
-			}
-			else {
-				printf("\nChecking an array for overflow...\n\nSuccessfully!\n\n");
-				break;
-			}
+				if (buffer != '\n') {			//buffercleaner
+					while (buffer != '\n')
+						scanf("%c", &buffer);
+					printf("\nChecking an array for overflow...\n\nError! Please try again.\n\n");
+				}
+				else {
+					printf("\nChecking an array for overflow...\n\nSuccessfully!\n\n");
+					break;
+				}
 		}
 		else {
 			printf("\nChecking an array for overflow...\n\nSuccessfully!\n\n");
@@ -25,7 +25,6 @@ int main() {
 	}
 	printf("Result:\n");
 	for (i = 0; str[i] != '\n'; i++) {
-		if (str[i] >= '0' && str[i] <= '9') {
 			switch (str[i]) {
 			case '0':
 				printf("zero");
@@ -57,9 +56,9 @@ int main() {
 			case '9':
 				printf("nine");
 				break;
+			default:
+				printf("%c", str[i]);
 			}
-		}
-		else printf("%c", str[i]);
 	}
 	getchar();
 	return 0;
